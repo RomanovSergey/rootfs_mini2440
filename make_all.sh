@@ -6,6 +6,7 @@ PLAY_START="$BASE/wav/elephant.wav"
 PLAY_ER="$BASE/wav/dog_bark_x.wav"
 PLAY_OK="$BASE/wav/cat_meow2.wav"
 
+
 prenv='no'
 if [ $prenv == 'yes' ]; then
   echo PREFIX=$PREFIX
@@ -43,6 +44,8 @@ status ()
 }
 
 #aplay $PLAY_START
+cd $BASE
+status $? 1
 
 WillBuildBysyBox='no'
 if [ $WillBuildBysyBox == 'yes' ]; then
@@ -71,24 +74,24 @@ if [ $WillOpenSSH == 'yes' ]; then
   #echo untar openSSL
   #tar -C $BASE/sys1/ -xvzf $BASE/download/openssl-1.0.1p.tar.gz
   #status $? 1
-  cd $BASE/sys1/openssl-1.0.1p
-  status $? 1
-  echo ""
+  #cd $BASE/sys1/openssl-1.0.1p
+  #status $? 1
+  #echo ""
   
-  echo './configure'
-  ./Configure dist --prefix=$BASE/sys1/openssl shared
-  status $? 1
-  echo ""
+  #echo './configure'
+  #./Configure dist --prefix=$BASE/sys1/openssl shared
+  #status $? 1
+  #echo ""
   
-  echo 'make ssl'
-  make CC="$CC" AR="${AR} r" RANLIB="${CROSS_COMPILE}ranlib"
-  status $? 1
-  echo ""
+  #echo 'make ssl'
+  #make CC="$CC" AR="${AR} r" RANLIB="${CROSS_COMPILE}ranlib"
+  #status $? 1
+  #echo ""
   
-  echo 'install ssl to tmpdir'
-  make install
-  status $? 1
-  echo ""
+  #echo 'install ssl to tmpdir'
+  #make install
+  #status $? 1
+  #echo ""
   
   echo "+++++++++++++++++++++++++++++++++++++++++++++"
   echo "+++++++++++++++++++++++++++++++++++++++++++++"
@@ -96,8 +99,38 @@ if [ $WillOpenSSH == 'yes' ]; then
   
   cd $BASE
   
+  #echo untar ZLIB
+  #tar -C $BASE/sys1/ -xvzf $BASE/download/zlib-1.2.8.tar.gz
+  #status $? 1
+  #echo ""
   
+  #cd $BASE/sys1/zlib-1.2.8
+  #status $? 1
+  #echo ""
   
+  #echo 'configure zlib'
+  #./configure --prefix=$BASE/sys1/zlib
+  #status $? 1
+  #echo ""
+  
+  #cd $BASE/sys1/zlib-1.2.8
+  #echo 'make'
+  #make
+  #status $? 1
+  #echo ""
+
+  #cd $BASE/sys1/zlib-1.2.8
+  #echo 'make install'
+  #make install
+  #status $? 1
+  #echo ""
+  
+  echo "+++++++++++++++++++++++++++++++++++++++++++++"
+  echo "+++++++++++++++++++++++++++++++++++++++++++++"
+  echo ""
+  
+  cd $BASE
+
 fi
 
 cd $BASE
