@@ -1,6 +1,10 @@
 #!/bin/sh
 
-. ./cross_env.sh
+. ./cross_envshtrih.sh
+
+echo '**** BEGIN ****'
+echo '$BASE='$BASE
+echo '$CC='$CC
 
 PLAY_START="$BASE/wav/elephant.wav"
 PLAY_ER="$BASE/wav/dog_bark_x.wav"
@@ -44,14 +48,19 @@ status ()
 }
 
 #aplay $PLAY_START
+echo 'cd to $BASE dir'
 cd $BASE
 status $? 1
 
-WillBuildBysyBox='no'
+WillBuildBysyBox='yes'
 if [ $WillBuildBysyBox == 'yes' ]; then
-  #echo untar BusyBox
-  #tar -C $BASE/sys1/ -xvzf $BASE/download/busybox-1.13.3-mini2440.tgz
-  #status $? 1
+
+  if [ 0 ]; then
+    echo 'untar BusyBox'
+    tar -C $BASE/sys1/ -xvzf $BASE/download/busybox-1.13.3-mini2440.tgz
+    status $? 1
+  fi
+  
   cd $BASE/sys1/busybox-1.13.3
   status $? 1
   echo ""
@@ -135,4 +144,4 @@ fi
 
 cd $BASE
 aplay $PLAY_OK
-
+echo '**** END ****'
